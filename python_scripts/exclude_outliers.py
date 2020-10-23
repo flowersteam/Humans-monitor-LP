@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 from os import path
 
+
 # Set outlier criteria
 av_crit = 100   # allocation variance critical value
 rb_crit = 2     # choice bias critical value
 activities = ['A1', 'A2', 'A3', 'A4']
-
 
 # Define a response bias function
 def rbf(x):
@@ -46,5 +46,5 @@ if __name__ == '__main__':
     df = df.loc[~df.index.isin(outlier), :]
     print(df.reset_index().groupby(by='group')['sid'].nunique())
 
-    # Sava data
+    # Save data
     df.reset_index().to_csv(path.join(data_path, 'clean_data.csv'), index=False)

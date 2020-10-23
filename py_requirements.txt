@@ -1,0 +1,8 @@
+jupyter==1.0.0
+matplotlib==3.2.2
+numdifftools==0.9.39
+numpy==1.19.0
+pandas==0.24.1
+scipy==1.5.1
+statsmodels==0.11.1
+tqdm==4.50.2
