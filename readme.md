@@ -1,5 +1,5 @@
 # Code repository
-Here you can find all of the custom code used to obtain the results for the study entitled **"Humans use learning progress in curiosity-drived exploration"**
+Here you can find all of the custom code used to obtain the results for the study entitled **"Humans monitor learning progress in curiosity-drived exploration"**
 
 Article preprint and raw data are available online at the OSF website.
 
