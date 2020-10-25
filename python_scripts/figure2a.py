@@ -7,7 +7,7 @@ from python_scripts.utils import vis_utils as vut
 from python_scripts.utils.vis_utils import gcolors, fullglabels, colors, gmarkers
 
 
-def task_choices_over_time(data_path, figname, save_to, save_as=None):
+def make_fig(data_path, figname, save_to, save_as=None):
     cols = ['st1', 'st2', 'st3', 'st4']
     df = lut.unpickle(data_path)
     df = df.set_index(['grp', 'sid', 'trial']).loc[:, cols]
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     data_path = path.join(path.dirname(__file__), '../data/ntm_data_freeplay.pkl')
     save_path = path.join(path.dirname(__file__), '../figures')
 
-    task_choices_over_time(
+    make_fig(
         data_path=data_path,
         figname='figure2a',
         save_to=save_path,
