@@ -3,22 +3,21 @@ library(plyr)
 library(ggplot2)
 
 # Load and clean up data
-dft <- tbl_df(read.csv('data/ntm_dwfpc.csv'))
+dft <- tbl_df(read.csv('data/learning_data.csv'))
 dft <- dplyr::filter(dft, ntm != 0)
-dft <- dplyr::select(dft, c(sid, grp, post))
+dft <- dplyr::select(dft, c(sid, group, dwfpc))
 
-mu <- ddply(dft, "grp", summarise, grp.mean=mean(post))
+mu <- ddply(dft, "group", summarise, group.mean=mean(post))
 head(mu)
 
-sdev <- ddply(dft, "grp", summarise, grp.sd=sd(post))
+sdev <- ddply(dft, "group", summarise, group.sd=sd(post))
 head(sdev)
 
 # Define looks
-dft$grp <- recode(dft$grp, '0' = 'IG', '1' = 'EG')
+dft$group <- recode(dft$group, '0' = 'IG', '1' = 'EG')
 gcolors = c('#fc4f30', '#008fd5')
-# gcolors <- c(rep('#fc4f30', 'IG'), rep('#008fd5', 'EG'))
 
-g <- ggplot(dft, aes(x = post, y = stat(count) / sum(count), fill=grp)) +  
+g <- ggplot(dft, aes(x = dwfpc, y = stat(count) / sum(count), fill=group)) +  
   geom_histogram(alpha=.6, position='identity', bins = 15) +
   scale_color_manual(values=gcolors) + scale_fill_manual(values=gcolors) +
   labs(
@@ -45,12 +44,12 @@ g <- ggplot(dft, aes(x = post, y = stat(count) / sum(count), fill=grp)) +
 
 plot(g)
 
-ggsave(
-  '2c.png',
-  plot = g,
-  path = '/Users/alexten/Projects/MonsterStudy/Paper/png',
-  width = 5,
-  height = 4,
-  units = 'in',
-  dpi = 300
-)
+# ggsave(
+#   '2c.png',
+#   plot = g,
+#   path = '/Users/alexten/Projects/MonsterStudy/Paper/png',
+#   width = 5,
+#   height = 4,
+#   units = 'in',
+#   dpi = 300
+# )

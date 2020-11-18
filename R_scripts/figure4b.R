@@ -2,20 +2,8 @@ library(tidyverse)
 library(gridExtra)
 library(cowplot)
 
-# Get interest difference
-dft <- tbl_df(read.csv('../data/post_play_long.csv')) %>%
-  dplyr::select(sid,grp,tid,int)
-A1 <- dplyr::filter(dft, tid == 1)
-A3 <- dplyr::filter(dft, tid == 3)
-A4 <- dplyr::filter(dft, tid == 4)
-rm(dft)
-A3['int_dif_A4A3'] = A4$int - A3$int
-A3['int_dif_A3A1'] = A3$int - A1$int
-diffs <- dplyr::select(A3, sid, int_dif_A4A3, int_dif_A3A1)
-rm(A3, A4)
-
-# Get coefficients data
-df <- tbl_df(read.csv('../data/coef_data.csv')) %>%
+# Load data
+df <- tbl_df(read.csv('data/coef_data.csv')) %>%
   dplyr::rename(wPC=pc_coef, wLP=rlp_coef) %>% 
   dplyr::mutate(A4minusA3 = -A3minusA4)
 
@@ -32,10 +20,9 @@ summary(lm_)
 lm_ <- lm(int_dif_A3A1 ~ grp*(wPC+wLP), data=df)
 summary(lm_)
 
-# Define looks
+# Set colors
 df$grp <- recode(df$grp, '0' = 'IG', '1' = 'EG')
 gcolors = c('#008fd5', '#fc4f30')
-
 
 # Add empty axes with text only
 gt0 <- ggplot() + geom_point() + theme_void() +  
@@ -54,7 +41,7 @@ gt1 <- ggplot() + geom_point() + theme_void() +
 # (0, 0) wPC vs A3-A1
 g00 <- ggplot(df, aes(x = wPC, y = A3minusA1, col = grp)) +
   geom_point(alpha=.4) +
-  geom_smooth(method=lm,, se=FALSE, fullrange = FALSE) +
+  geom_smooth(method=lm, se=FALSE, fullrange = FALSE) +
   annotate('segment', x=-6, y=50, xend=-6, yend=240, arrow=arrow(length=unit(0.3, "cm"))) +
   annotate('text', x=-6.5, y=50, label='prefer HARDER', angle=90, size=2.5, hjust='left') + 
   annotate('segment', x=-6, y=-50, xend=-6, yend=-240, arrow=arrow(length=unit(0.3, "cm"))) +
@@ -151,12 +138,12 @@ g11 <- ggplot(df, aes(x = wLP, y = A4minusA3, col = grp)) +
 pg <- arrangeGrob(gt0, g00, g01, gt1, g10, g11, ncol=3, nrow=2)
 plot(pg)
 
-ggsave(
-  'figure4b.svg',
-  plot = pg,
-  path = '../figures/',
-  width = 10,
-  height = 5,
-  units = 'in',
-  dpi = 300
-)
+# ggsave(
+#   'figure4b.svg',
+#   plot = pg,
+#   path = '../figures/',
+#   width = 10,
+#   height = 5,
+#   units = 'in',
+#   dpi = 300
+# )
