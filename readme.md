@@ -1,7 +1,7 @@
 # Code repository
 Here you can find all of the custom code used to obtain the results for the study entitled **"Humans use learning progress in curiosity-drived exploration"**
 
-Article preprint is published on [PsyArxiv](https://psyarxiv.com/7dbr6/)  and raw data are available online at the [OSF website](https://osf.io/k2yur/) (the same raw files are included in this repository).
+Article preprint is published on [PsyArxiv](https://psyarxiv.com/7dbr6/)  and raw data are available online at the [OSF website](https://osf.io/k2yur/) as well as here.
 
 ## Description of the files
 Statistical analyses and data visualizations were done in [Python](https://www.python.org/) 3.6 and [R](https://www.r-project.org/) 3.5.0. Python dependencies are listed in the "py_requirements.txt" file, and the required packages for R are given as plain text in the "R_packages.txt".
