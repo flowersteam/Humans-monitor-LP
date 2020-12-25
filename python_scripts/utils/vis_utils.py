@@ -76,19 +76,19 @@ def color_legend(legend, fontweight='bold'):
         text.set_fontweight(fontweight)
 
 
-def ghostify(ax):
+def ghost(ax):
     ax.tick_params(left=False, labelleft=False, bottom=False, labelbottom=False)
     for spine in ax.spines.values(): spine.set_visible(False)
-
+    return ax
 
 def add_subplot_label(ax, x, y, label, size, preview=False):
     ax.text(x, y, label, transform=ax.transAxes,
         size=size, weight='bold')
     if preview:
-        ghostify(ax)
+        ghost(ax)
         ax.set_facecolor('gray')
     else:
-        ghostify(ax)
+        ghost(ax)
 
 
 def change_width(ax, new_value) :
@@ -113,7 +113,7 @@ def strip_axes(ax, remove_spines=False):
 
 gcolors = ['#008fd5', '#fc4f30']
 gmarkers = ['s', 'o']
-colors = ['#65C2A5', '#FC8D62', '#8DA0CB', '#E78AC3']
+colors = ['#65C2A5', '#D4D669', '#8DA0CB', '#E78AC3']
 ncolors = ['#7BD8ED','#656CBE', '#4E008E']
 glabels = {0: 'IG', 1: 'EG'}
 fullglabels = {0: 'IG', 1: 'EG'}
