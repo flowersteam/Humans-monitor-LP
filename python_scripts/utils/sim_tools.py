@@ -16,8 +16,8 @@ import ipywidgets as wid
 import loc_utils as lut
 from standards import *
 
-main_path = 'supplementary/simple_choice_model/data/main_data.pkl' 
-ntm_path = 'supplementary/simple_choice_model/data/ntm_data.pkl'
+# main_path = 'supplementary/simple_choice_model/data/main_data.pkl' 
+# ntm_path = 'supplementary/simple_choice_model/data/ntm_data.pkl'
 r = RAWix()
 colors = ['#43799d', '#cc5b46', '#ffbb00', '#71bc78', '#43799d', '#cc5b46', '#ffbb00', '#71bc78']
 tlabels = {

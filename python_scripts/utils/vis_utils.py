@@ -56,70 +56,6 @@ def line_histogram(ax, data, bins, label, precision=None, lw=1, c=None, alpha=1,
     return y
 
 
-def smooth(x, window_len=11, window='hanning'):
-    """smooth the data using a window with requested size.
-    
-    This method is based on the convolution of a scaled window with the signal.
-    The signal is prepared by introducing reflected copies of the signal 
-    (with the window size) in both ends so that transient parts are minimized
-    in the begining and end part of the output signal.
-    
-    input:
-        x: the input signal 
-        window_len: the dimension of the smoothing window; should be an odd integer
-        window: the type of window from 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'
-            flat window will produce a moving average smoothing.
-
-    output:
-        the smoothed signal
-        
-    example:
-
-    t=linspace(-2,2,0.1)
-    x=sin(t)+randn(len(t))*0.1
-    y=smooth(x)
-    
-    see also: 
-    
-    numpy.hanning, numpy.hamming, numpy.bartlett, numpy.blackman, numpy.convolve
-    scipy.signal.lfilter
- 
-    TODO: the window parameter could be the window itself if an array instead of a string
-    NOTE: length(output) != length(input), to correct this: return y[(window_len/2-1):-(window_len/2)] instead of just y.
-    """
-
-    if x.ndim != 1:
-        raise ValueError("smooth only accepts 1 dimension arrays.")
-
-    if x.size < window_len:
-        raise ValueError("Input vector needs to be bigger than window size.")
-
-
-    if window_len<3:
-        return x
-
-
-    if not window in ['flat', 'hanning', 'hamming', 'bartlett', 'blackman']:
-        raise ValueError("Window is on of 'flat', 'hanning', 'hamming', 'bartlett', 'blackman'")
-
-
-    s=np.r_[x[window_len-1:0:-1],x,x[-2:-window_len-1:-1]]
-    #print(len(s))
-    if window == 'flat': #moving average
-        w=np.ones(window_len,'d')
-    else:
-        w=eval('np.'+window+'(window_len)')
-
-    y=np.convolve(w/w.sum(),s,mode='valid')
-    return y
-
-    
-def pad_lims(a, scale=.05):
-    mn, mx = np.min(a), np.max(a)
-    rng = np.abs(mx - mn)
-    return (mn-rng*scale, mx+rng*scale)
-
-
 def pretty(ax, gridlines='both'):
     despine(ax)
     ax.grid(True, c='gray', zorder=2, ls=':', axis=gridlines)
@@ -134,37 +70,37 @@ def save_it(fig, savedir, figname, save_as='svg', dpi=300, compress=False):
     print('SAVED TO: {}'.format(s))
 
 
-def rand_jitter(arr):
-    stdev = .01*(max(arr)-min(arr))
-    return arr + np.random.randn(len(arr)) * stdev
-
-
 def color_legend(legend, fontweight='bold'):
     for i, (line, text) in enumerate(zip(legend.get_lines(), legend.get_texts())):
         text.set_color(line.get_color())
         text.set_fontweight(fontweight)
-    
 
-def label_diff(ax, i, j, text, X, Y):
-    x = (X[i]+X[j])/2
-    y = 1.1*max(Y[i], Y[j])
-    dx = abs(X[i]-X[j])
 
-    props = {'connectionstyle':'bar','arrowstyle':'-',\
-                 'shrinkA':20,'shrinkB':20,'linewidth':2}
-    ax.annotate(text, xy=(X[i],y+7), zorder=10)
-    ax.annotate('', xy=(X[i],y), xytext=(X[j],y), arrowprops=props)
-    
-
-def ghostify(ax):
+def ghost(ax):
     ax.tick_params(left=False, labelleft=False, bottom=False, labelbottom=False)
     for spine in ax.spines.values(): spine.set_visible(False)
-    
-    
-def metric(width, height, unit='mm'):
-    O = {'mm': .001, 'cm': .01, 'm': 1}
-    C = 39.37008
-    return ((width*O[unit])*C, (height*O[unit])*C)
+    return ax
+
+def add_subplot_label(ax, x, y, label, size, preview=False):
+    ax.text(x, y, label, transform=ax.transAxes,
+        size=size, weight='bold')
+    if preview:
+        ghost(ax)
+        ax.set_facecolor('gray')
+    else:
+        ghost(ax)
+
+
+def change_width(ax, new_value) :
+    for patch in ax.patches :
+        current_width = patch.get_width()
+        diff = current_width - new_value
+
+        # we change the bar width
+        patch.set_width(new_value)
+
+        # we recenter the bar
+        patch.set_x(patch.get_x() + diff * .5)
 
 
 def strip_axes(ax, remove_spines=False):
@@ -177,7 +113,7 @@ def strip_axes(ax, remove_spines=False):
 
 gcolors = ['#008fd5', '#fc4f30']
 gmarkers = ['s', 'o']
-colors = ['#65C2A5', '#FC8D62', '#8DA0CB', '#E78AC3']
+colors = ['#65C2A5', '#D4D669', '#8DA0CB', '#E78AC3']
 ncolors = ['#7BD8ED','#656CBE', '#4E008E']
 glabels = {0: 'IG', 1: 'EG'}
 fullglabels = {0: 'IG', 1: 'EG'}
