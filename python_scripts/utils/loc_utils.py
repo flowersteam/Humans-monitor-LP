@@ -70,3 +70,9 @@ def boolean_indexing(l, fillval=5):
 
 def onehotize(a):
     return (np.arange(a.max()) == a[..., None]-1).astype(int)
+
+
+def smooth(y, box_pts):
+    box = np.ones(box_pts)/box_pts
+    y_smooth = np.convolve(y, box, mode='same')
+    return y_smooth
