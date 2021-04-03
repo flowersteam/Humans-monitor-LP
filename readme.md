@@ -1,5 +1,5 @@
-# Humans use learning progress in curiosity-drived exploration
-Here you can find all of the custom code used to obtain the results for the study entitled **"Humans use learning progress in curiosity-drived exploration"**.
+# Humans use learning progress in curiosity-driven exploration
+Here you can find all of the custom code used to obtain the results for the study entitled **"Humans use learning progress in curiosity-driven exploration"**.
 
 The article preprint is published on [PsyArxiv](https://psyarxiv.com/7dbr6/) and raw data are available online at the [OSF website](https://osf.io/k2yur/) as well as here. The manuscript is under revision in Nature Communications (we will post a link once the paper gets published).
 
