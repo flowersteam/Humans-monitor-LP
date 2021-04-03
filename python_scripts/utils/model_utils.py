@@ -133,14 +133,14 @@ class SoftmaxChoiceModel(object):
                 if show_progress:
                     progbar.update()
             else:
-                if loss < self.negloglik:
+                if (self.negloglik - loss) > .001:
                     self.negloglik = loss
                     self.params = fitted_params
                     n_min = 1
                     if show_progress:
                         progbar.reset()
                         progbar.refresh()
-                elif loss == self.negloglik:
+                elif (self.negloglik - loss) < .001:
                     n_min += 1
                     if show_progress:
                         progbar.update()
@@ -157,10 +157,7 @@ class SoftmaxChoiceModel(object):
 
     def get_aic(self):
         # We add 1 to the number of params to account for the temperature parameter
-        if self.negloglik:
-            return 2 * self.negloglik + 2 * (len(self.params) + 1)
-        else:
-            return None
+        return 2 * self.negloglik + 2 * (len(self.params) + 1)
 
     def get_param_csv(self):
         if self.params is not None:
