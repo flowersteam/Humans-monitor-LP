@@ -76,3 +76,14 @@ def smooth(y, box_pts):
     box = np.ones(box_pts)/box_pts
     y_smooth = np.convolve(y, box, mode='same')
     return y_smooth
+
+
+def get_binned_data(data_path, nbins):
+    df = pd.read_csv(data_path)
+    df = df.loc[df.vars.eq('rpc,rlp'), :]
+    norm = np.linalg.norm(df.loc[:, 'rpc':'rlp'].values, axis=1)
+    df['norm_rpc'] = df.rpc / norm
+    df['norm_rlp'] = df.rlp / norm
+    df['qi_rpc'] = pd.cut(df.norm_rpc, bins=nbins)
+    df['qi_rlp'] = pd.cut(df.norm_rlp, bins=nbins)
+    return df
