@@ -134,6 +134,7 @@ class SoftmaxChoiceModel(object):
                     progbar.update()
             else:
                 if (self.negloglik - loss) > .001:
+                    # if current loss is less than the current minimum, assign this lower loss as new current minimum and save params
                     self.negloglik = loss
                     self.params = fitted_params
                     n_min = 1
