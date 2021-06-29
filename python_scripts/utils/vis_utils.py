@@ -109,7 +109,7 @@ def strip_axes(ax, remove_spines=False):
     if remove_spines:
         for pos in 'left,right,top,bottom'.split(','):
             ax.spines[pos].set_visible(False)
-
+    return ax
 
 gcolors = ['#008fd5', '#fc4f30']
 gmarkers = ['s', 'o']
