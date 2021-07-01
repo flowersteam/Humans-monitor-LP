@@ -1,5 +1,5 @@
 ### FIGURE
-figure.facecolor: white
+figure.facecolor: lightgray
 figure.dpi: 100
 figure.titlesize: 14
 figure.titleweight: bold
@@ -11,25 +11,26 @@ lines.linewidth: 1.5
 #patch.facecolor: 0072B2
 
 ### LEGEND
-legend.fontsize: 12
+legend.fontsize: 7
 
 ### TICKS
 xtick.direction: out
 ytick.direction: out
 
+
 ### FONTS (Avenir, 'Avenir Next LT Pro')
 font.family: sans-serif
-font.sans-serif: Arial, Helvetica, sans-serif
+font.sans-serif: Arial, sans-serif
 # font.weight: bold
-font.size: 12
+font.size: 7
 
 ### AXES
 axes.grid: False
 axes.facecolor: white
-axes.linewidth: 1.0
-axes.titlesize: 12
+axes.linewidth: 0.6
+axes.titlesize: 9
 axes.titleweight: bold
-axes.labelsize: 12
+axes.labelsize : 7
 # axes.labelweight: bold
 axes.spines.top: True
 axes.spines.right: True
