@@ -58,7 +58,7 @@ def line_histogram(ax, data, bins, label, precision=None, lw=1, c=None, alpha=1,
 
 def pretty(ax, gridlines='both'):
     despine(ax)
-    ax.grid(True, c='gray', zorder=2, ls=':', axis=gridlines)
+    ax.grid(True, c='gray', zorder=2, ls=':', axis=gridlines, lw=.5)
     return ax
 
 
@@ -89,6 +89,7 @@ def add_subplot_label(ax, x, y, label, size, preview=False):
         ax.set_facecolor('gray')
     else:
         ghost(ax)
+        ax.set_facecolor([1,1,1,0])
 
 
 def change_width(ax, new_value) :
@@ -110,6 +111,7 @@ def strip_axes(ax, remove_spines=False):
         for pos in 'left,right,top,bottom'.split(','):
             ax.spines[pos].set_visible(False)
     return ax
+
 
 gcolors = ['#008fd5', '#fc4f30']
 gmarkers = ['s', 'o']
