@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5068243.svg)](https://doi.org/10.5281/zenodo.5068243)
+
 # Humans use learning progress in curiosity-driven exploration
 Here you can find all of the custom code used to obtain the results for the study entitled **"Humans use learning progress in curiosity-driven exploration"**.
 
